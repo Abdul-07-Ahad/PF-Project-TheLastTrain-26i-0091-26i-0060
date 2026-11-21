@@ -8,8 +8,6 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
-
-// Modular simulation loop using primitive variables
 bool handleMoveCommand(int targetFloor, int targetRoom,
                        int& currentFloor, int& currentRoom,
                        int& energy, int& time,
@@ -406,4 +404,6 @@ void runSimulation(int& playerFloor, int& playerRoom,
         cout << "Game ended." << endl;
     }
     cout << "Final score: " << score << endl;
+    writeGameSummaryReport("out/game_summary.txt", score, energy, time,
+                       objectives, objectives[OBJ_MISSION_WON]);
 }

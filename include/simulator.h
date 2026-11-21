@@ -1,6 +1,7 @@
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
 
+#include "config.h"
 #include "state.h"
 
 // Lifecycle controllers using primitive variables

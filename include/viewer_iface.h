@@ -1,6 +1,7 @@
 #ifndef VIEWER_IFACE_H
 #define VIEWER_IFACE_H
 
+#include "config.h"
 #include "state.h"
 
 // Terminal Visualization using primitive variables

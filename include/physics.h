@@ -1,6 +1,7 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
+#include "config.h"
 #include "state.h"
 
 // Movement validation, connectivity & resource adjustments

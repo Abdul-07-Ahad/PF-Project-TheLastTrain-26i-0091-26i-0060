@@ -1,6 +1,7 @@
 #ifndef SWITCHES_H
 #define SWITCHES_H
 
+#include "config.h"
 #include "state.h"
 
 // Access control & puzzle validation without structs

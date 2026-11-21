@@ -1,6 +1,7 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
+#include "config.h"
 #include "state.h"
 
 // State Persistence using primitive variables

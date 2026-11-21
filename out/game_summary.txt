@@ -1,0 +1,21 @@
+=== THE LAST TRAIN - GAME SUMMARY ===
+Result: DEFEAT
+Final score: 10
+Remaining Energy: 99
+Remaining Time: 49
+
+--- Objectives ---
+[x] Master Key collected
+[ ] Clue Digit 4 found
+[ ] Clue Digit 2 found
+[ ] Clue Digit 7 found
+[ ] Cabinet unlocked
+[ ] Train Key acquired
+[ ] Fuse collected
+[ ] Fuse installed
+[ ] Lift Pass collected
+[ ] Lift 2 active
+[ ] Passenger rescued
+[ ] Cat Carrier collected
+[ ] Cat secured
+[ ] Train prepared

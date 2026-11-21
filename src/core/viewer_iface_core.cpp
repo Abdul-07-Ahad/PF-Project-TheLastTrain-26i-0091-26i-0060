@@ -11,22 +11,7 @@ const char* ROOM_NAMES[NUM_FLOORS][ROOMS_PER_FLOOR] = {
     {"First Aid Station", "Medical Room", "Maintenance Corridor", "Office"},
     {"Security Room", "Train Boarding Platform", "Storage Room", "Observation Deck"}
 };
-const char* OBJ_NAMES[] = {
-    "Master Key collected",        
-    "Clue Digit 4 found",          
-    "Clue Digit 2 found",          
-    "Clue Digit 7 found",          
-    "Cabinet unlocked",            
-    "Train Key acquired",          
-    "Fuse collected",              
-    "Fuse installed", 
-    "Fift 2 pass",            
-    "Lift 2 active",               
-    "Passenger rescued",           
-    "Cat Carrier collected",       
-    "Cat secured",                 
-    "Train prepared"               
-};
+
 void renderDashboard(int playerFloor, int playerRoom, int energy, int time, int score,
                      const char inventory[MAX_INVENTORY_CAPACITY], int inventoryCount,
                      int emergencyTripsLeft) {
@@ -54,10 +39,10 @@ void renderRoomDetails(int floor, int room,
     cout << "--- F" << floor << "-R" << room << ": " << ROOM_NAMES[floor-1][room-1] << endl;
     cout << "You see: ";
     if (entityCount == 0) {
-        cout << "nothing";
+        cout << "nothing here now";
     } else {
         for (int i = 0; i < entityCount; i++) {
-            cout << getEntityName(roomEntities[floor-1][room-1][i])<< " (" << roomEntities[floor - 1][room - 1][i] << ")";
+            cout << getEntityName(roomEntities[floor-1][room-1][i])<< " { " << roomEntities[floor - 1][room - 1][i] << " }";
             if (i < entityCount - 1) {
                 cout << ", ";
             }
@@ -67,14 +52,14 @@ void renderRoomDetails(int floor, int room,
 }
 void renderObjectivesChecklist(const bool objectives[NUM_OBJECTIVES]) {
     cout << "--Objectives--" << endl;
-    for (int i = 0; i < NUM_OBJECTIVES; i++){
+    for (int i = 0; i < OBJ_MISSION_WON; i++){
         if (objectives[i]){
             cout << "[done] ";
         } 
         else {
             cout << "[ ] ";
         }
-        cout << objectives[i] << endl;
+        cout << getObjectiveName(i) << endl;
     }
 }
 void renderAsciiBuilding(int playerFloor, int playerRoom) {
