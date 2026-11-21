@@ -5,6 +5,7 @@
 const int NUM_FLOORS = 5;
 const int ROOMS_PER_FLOOR = 4;
 const int TOTAL_ROOMS = 20;
+const int EMERGENCY_TRIPS_GRANTED = 3;
 
 // --- Resource Pools ---
 const int MAX_ENERGY = 100;

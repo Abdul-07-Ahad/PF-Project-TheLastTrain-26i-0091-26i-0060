@@ -43,5 +43,11 @@ bool handleUnlockCabinetCommand(const char* code, int currentFloor, int currentR
                                 int& entityCount);
 
 bool checkEndConditions(int energy, int time, const bool objectives[NUM_OBJECTIVES]);
-
+int findEntityInRoom(const char roomEntities[NUM_FLOORS][ROOMS_PER_FLOOR][MAX_ENTITIES_PER_ROOM],
+                     int floor, int room, int entityCount, char symbol);
+void removeEntityFromRoom(char roomEntities[NUM_FLOORS][ROOMS_PER_FLOOR][MAX_ENTITIES_PER_ROOM],
+                          int floor, int room, int& entityCount, int index);
+bool handleBoardTrainCommand(int currentFloor, int currentRoom,
+                             int& energy, int& time, int& score,
+                             bool objectives[NUM_OBJECTIVES]);
 #endif // SIMULATOR_H

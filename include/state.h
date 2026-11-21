@@ -1,14 +1,16 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include "config.h"
-
 // Connection Type Constants (Stored in char or int 2D matrices)
 const char CONN_NONE        = ' ';
 const char CONN_DOOR        = 'D'; // Ordinary door
 const char CONN_WINDOW      = 'W'; // Window traversal
 const char CONN_LOCKED_DOOR = 'L'; // Locked door (requires Master Key)
 const char CONN_SOLID_WALL  = '#'; // Wall partition (impassable)
+//added three more connection types for the lift and stairs
+const char CONN_STAIRS      = 'S'; // Staircase between floors
+const char CONN_LIFT1       = '1'; // Lift 1 (floors 1 and 2)
+const char CONN_LIFT2       = '2'; // Lift 2 (floors 2, 4 and 5)
 
 // Entity / Item Character Symbols (Stored in 2D/3D char arrays)
 const char ENT_NONE             = ' ';

@@ -1,6 +1,6 @@
 #ifndef LEVEL_H
 #define LEVEL_H
-
+#include "config.h"
 #include "state.h"
 
 // Building & Level Parsing using primitive parallel arrays

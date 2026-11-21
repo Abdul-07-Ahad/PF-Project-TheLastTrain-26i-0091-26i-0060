@@ -7,5 +7,5 @@ void trimWhitespace(char* str);
 bool stringEquals(const char* a, const char* b);
 void printHeader(const char* title);
 void clearScreen();
-
+const char* getValue(const char* line, const char* key); //added helper function myself that was not already given
 #endif // UTIL_H

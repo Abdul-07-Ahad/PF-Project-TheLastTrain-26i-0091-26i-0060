@@ -3,15 +3,15 @@
 #include "logger.h"
 #include "viewer_iface.h"
 #include <iostream>
+using namespace std;
 
 int main() {
     // Player State Primitives
-    int playerFloor = 1;
-    int playerRoom = 1;
+    int playerFloor = 0;
+    int playerRoom = 0;
     int energy = INITIAL_ENERGY;
     int time = INITIAL_TIME;
     int score = INITIAL_SCORE;
-    
     char inventory[MAX_INVENTORY_CAPACITY];
     int inventoryCount = 0;
     int emergencyTripsLeft = 0;
@@ -27,21 +27,31 @@ int main() {
     const char* mapFile = "data/building.txt";
     const char* initStateFile = "data/initial-state.txt";
 
-    if (!loadBuildingMap(mapFile, horizontalConn, roomEntities, entityCounts)) {
+    if (!loadBuildingMap(mapFile, horizontalConn, roomEntities, entityCounts)){
         std::cerr << "Error: Could not load " << mapFile << "\n";
         return 1;
     }
 
     if (!loadInitialState(initStateFile, playerFloor, playerRoom, energy, time, score,
-                          inventory, inventoryCount, objectives, emergencyTripsLeft)) {
+                          inventory, inventoryCount, objectives, emergencyTripsLeft)){
         std::cerr << "Error: Could not load " << initStateFile << "\n";
         return 1;
     }
-
+    while (!validateStartingRoom(playerFloor, playerRoom, horizontalConn)){
+    std::cout << "Choose your starting room (floor room), e.g. 5 2: ";
+    if (!(std::cin >> playerFloor >> playerRoom)){
+        if (std::cin.eof()){
+            return 1;
+        }
+        std::cin.clear();
+        playerFloor = 0;
+        playerRoom = 0;
+    }
+    std::cin.ignore(1000, '\n');
+    }
     std::cout << "===========================================\n";
     std::cout << " THE LAST TRAIN - SIMULATION INITIALIZED   \n";
     std::cout << "===========================================\n";
-
     runSimulation(playerFloor, playerRoom, energy, time, score,
                   inventory, inventoryCount, objectives, emergencyTripsLeft,
                   horizontalConn, roomEntities, entityCounts);
