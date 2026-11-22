@@ -254,6 +254,7 @@ void printHelp() {
     cout << "help                  show this list" << endl;
     cout << "quit                  leave the game" << endl;
     cout << "board                 board the train (at F5-R2, when ready)" << endl;
+    cout << "save                  save your game to out/savegame.txt" << endl;
 }
 bool handleBoardTrainCommand(int currentFloor, int currentRoom,
                              int& energy, int& time, int& score,
@@ -375,11 +376,22 @@ void runSimulation(int& playerFloor, int& playerRoom,
                 applyResourceDelta(energy, time, COST_ITEM_USE_ENERGY, COST_ITEM_USE_TIME);
             }
         }
-        else if (stringEquals(command, "objectives")) {
+        else if (stringEquals(command, "objectives")){
             renderObjectivesChecklist(objectives);
         }
-        else if (stringEquals(command, "board")) {
+        else if (stringEquals(command, "board")){
             handleBoardTrainCommand(playerFloor, playerRoom, energy, time, score, objectives);
+        }
+        else if (stringEquals(command, "save")){
+            if (saveGameStateToFile("out/savegame.txt", playerFloor, playerRoom,
+                                    energy, time, score, inventory, inventoryCount,
+                                    objectives, emergencyTripsLeft,
+                                    roomEntities, entityCounts)) {
+                cout << "Game saved." << endl;
+            } 
+            else {
+                cout << "Could not save the game." << endl;
+            }
         }
         else {
             cout << "Invalid input. Type 'help' to see the commands." << endl;

@@ -1,11 +1,11 @@
 === THE LAST TRAIN - GAME SUMMARY ===
 Result: DEFEAT
-Final score: 10
-Remaining Energy: 99
+Final score: 0
+Remaining Energy: 100
 Remaining Time: 49
 
 --- Objectives ---
-[x] Master Key collected
+[ ] Master Key collected
 [ ] Clue Digit 4 found
 [ ] Clue Digit 2 found
 [ ] Clue Digit 7 found
