@@ -1,0 +1,19 @@
+n
+1 2
+move 2 2
+move 1 2
+move 2 2
+move 1 2
+move 2 2
+move 1 2
+move 2 2
+move 1 2
+move 2 2
+move 1 2
+move 2 2
+move 1 2
+move 2 2
+move 1 2
+move 2 2
+move 1 2
+move 2 2

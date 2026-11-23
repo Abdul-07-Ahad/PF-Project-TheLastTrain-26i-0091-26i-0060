@@ -18,8 +18,12 @@ void writeGameSummaryReport(const char* filename,
     file << "=== THE LAST TRAIN - GAME SUMMARY ===" << endl;
     if (victory) {
         file << "Result: VICTORY" << endl;
-    } else {
+    } 
+    else if (remainingEnergy <= 0 || remainingTime <= 0) {
         file << "Result: DEFEAT" << endl;
+    } 
+    else {
+        file << "Result: INCOMPLETE (player quit)" << endl;
     }
     file << "Final score: " << score << endl;
     file << "Remaining Energy: " << remainingEnergy << endl;

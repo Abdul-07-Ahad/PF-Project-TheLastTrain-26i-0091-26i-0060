@@ -1,0 +1,14 @@
+x
+n
+9 9
+12
+abc
+1 2
+hello
+move a b
+move 12 3
+move 1 3
+collect Z
+use Z
+inspect
+quit
