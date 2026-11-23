@@ -6,7 +6,6 @@
 #include <iostream>
 #include <sstream>
 using namespace std;
-
 int main() {
     int playerFloor = 0;
     int playerRoom = 0;
@@ -17,7 +16,6 @@ int main() {
     int inventoryCount = 0;
     int emergencyTripsLeft = 0;
     bool objectives[NUM_OBJECTIVES] = { false };
-    // Building Connectivity & Entity Parallel Matrices
     char horizontalConn[NUM_FLOORS][ROOMS_PER_FLOOR - 1];
     char roomEntities[NUM_FLOORS][ROOMS_PER_FLOOR][MAX_ENTITIES_PER_ROOM];
     int entityCounts[NUM_FLOORS][ROOMS_PER_FLOOR] = { 0 };
@@ -32,20 +30,54 @@ int main() {
         cerr << "Error: Could not load " << initStateFile << "\n";
         return 1;
     }
-    // Ask for a starting room until the player gives a valid one
+
+    char answer[100];
+    bool chosen = false;
+    while (!chosen) {
+        cout << "Type n for a new game, or r to resume a saved game (or quit): ";
+        if (!cin.getline(answer, 100)) {
+            if (cin.eof()) {
+                return 1;
+            }
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid input. Please type n, r or quit." << endl;
+            continue;
+        }
+        if (stringEquals(answer, "quit")) {
+            return 0;
+        } 
+        else if (stringEquals(answer, "n") || stringEquals(answer, "N")) {
+            chosen = true;
+        } 
+        else if (stringEquals(answer, "r") || stringEquals(answer, "R")) {
+            chosen = true;
+            if (loadGameStateFromFile("out/savegame.txt", playerFloor, playerRoom, energy, time, score,
+                     inventory, inventoryCount, objectives, emergencyTripsLeft,
+                     roomEntities, entityCounts)) {
+                cout << "Game loaded." << endl;
+            } else {
+                cout << "No saved game could be loaded. Starting a new game." << endl;
+            }
+        } 
+        else {
+            cout << "Invalid input. Please type n, r or quit." << endl;
+        }
+    }
+
     while (!validateStartingRoom(playerFloor, playerRoom, horizontalConn)) {
         cout << "Choose your starting room (floor room), e.g. 5 2 (or type quit): ";
         char line[100];
         if (!cin.getline(line, 100)) {
             if (cin.eof()) {
-                return 1;                       // the input ended
+                return 1;
             }
-            cin.clear();                        // the line was too long
+            cin.clear();
             cin.ignore(1000, '\n');
             continue;
         }
         if (stringEquals(line, "quit")) {
-            return 0;                           // the player chose to leave
+            return 0; 
         }
         istringstream input(line);
         if (!(input >> playerFloor >> playerRoom)) {
