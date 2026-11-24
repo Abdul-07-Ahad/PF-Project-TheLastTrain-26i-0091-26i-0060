@@ -34,5 +34,5 @@ bool verifyCabinetCode(const char* enteredCode, const bool objectives[NUM_OBJECT
     if (!objectives[OBJ_CLUE_2] || !objectives[OBJ_CLUE_4] || !objectives[OBJ_CLUE_7]) {
         return false;                      
     }
-    return stringEquals(enteredCode, "427");       // which util function compares two strings?
+    return stringEquals(enteredCode, "427");
 }

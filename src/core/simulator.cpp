@@ -25,7 +25,7 @@ bool handleMoveCommand(int targetFloor, int targetRoom,
         return false;
     }
 
-    int costEnergy = COST_MOVE_ORDINARY_ENERGY;      // ordinary move by default
+    int costEnergy = COST_MOVE_ORDINARY_ENERGY;
     int costTime = COST_MOVE_ORDINARY_TIME;
     if (connType == CONN_WINDOW) {
         costEnergy = COST_MOVE_WINDOW_ENERGY;
@@ -37,7 +37,7 @@ bool handleMoveCommand(int targetFloor, int targetRoom,
     }
 
     if (connType == CONN_LIFT2 && !lift2Operational) {
-        emergencyTripsLeft--;     // use up one emergency trip
+        emergencyTripsLeft--; 
     }
 
     applyResourceDelta(energy, time, costEnergy, costTime);
@@ -58,7 +58,7 @@ bool handleInspectCommand(int currentFloor, int currentRoom,
     renderRoomDetails(currentFloor, currentRoom, roomEntities, entityCount);
 
     for (int i = 0; i < entityCount; i++) {
-        char item = roomEntities[currentFloor-1][currentRoom-1][i];     // floor-1, room-1
+        char item = roomEntities[currentFloor-1][currentRoom-1][i]; 
         if (item == ENT_CLUE_4 && !objectives[OBJ_CLUE_4]) {
             objectives[OBJ_CLUE_4] = true;
             applyScoreDelta(score, SCORE_CLUE_FOUND);
@@ -95,7 +95,7 @@ void removeEntityFromRoom(char roomEntities[NUM_FLOORS][ROOMS_PER_FLOOR][MAX_ENT
     for (int i = index; i < entityCount - 1; i++) {
         roomEntities[floor - 1][room - 1][i] = roomEntities[floor-1][room-1][i + 1];
     }
-    roomEntities[floor - 1][room - 1][entityCount - 1] = ENT_NONE;   // clear the vacated slot
+    roomEntities[floor - 1][room - 1][entityCount - 1] = ENT_NONE;
     entityCount--;
 }
 bool handleCollectCommand(char itemSymbol, int currentFloor, int currentRoom,
@@ -119,7 +119,7 @@ bool handleCollectCommand(char itemSymbol, int currentFloor, int currentRoom,
 
     if (itemSymbol == ENT_ENERGY_PACK || itemSymbol == ENT_EMERGENCY_TOOLKIT ||
         itemSymbol == ENT_OBSERVATION_TOKEN) {
-        applyResourceDelta(energy, time, COST_ITEM_PICKUP_ENERGY, COST_ITEM_PICKUP_TIME);       // pickup cost
+        applyResourceDelta(energy, time, COST_ITEM_PICKUP_ENERGY, COST_ITEM_PICKUP_TIME);
         if (itemSymbol == ENT_ENERGY_PACK) {
             applyResourceDelta(energy, time, BONUS_ENERGY_PACK, 0);
         } 
@@ -127,19 +127,19 @@ bool handleCollectCommand(char itemSymbol, int currentFloor, int currentRoom,
             applyResourceDelta(energy, time, BONUS_EMERGENCY_TOOLKIT, 0);
         } 
         else {
-            applyResourceDelta(energy, time, 0, BONUS_OBSERVATION_TOKEN);      // the token gives time
+            applyResourceDelta(energy, time, 0, BONUS_OBSERVATION_TOKEN); 
         }
         removeEntityFromRoom(roomEntities, currentFloor, currentRoom, entityCount, index);
         cout << "You used up " << getEntityName(itemSymbol) << "." << endl;
         return true;
     }
 
-    if (!addItem(inventory, inventoryCount, itemSymbol)) {     // try to add it to the bag
+    if (!addItem(inventory, inventoryCount, itemSymbol)) {
         cout << "Your inventory is full." << endl;
         return false;
     }
 
-    applyResourceDelta(energy, time, COST_ITEM_PICKUP_ENERGY, COST_ITEM_PICKUP_TIME);            // pickup cost
+    applyResourceDelta(energy, time, COST_ITEM_PICKUP_ENERGY, COST_ITEM_PICKUP_TIME);
     removeEntityFromRoom(roomEntities, currentFloor, currentRoom, entityCount, index);
 
     if (itemSymbol == ENT_MASTER_KEY) {
@@ -174,7 +174,7 @@ bool handleUseCommand(char itemSymbol, int currentFloor, int currentRoom,
             cout << "There is nothing to use the fuse on here." << endl;
             return false;
         }
-        if (!installFuseControlPanel(inventory, inventoryCount, objectives, score)) {   // install the fuse
+        if (!installFuseControlPanel(inventory, inventoryCount, objectives, score)) {
             return false;
         }
     } 
@@ -200,7 +200,7 @@ bool handleUseCommand(char itemSymbol, int currentFloor, int currentRoom,
         cout << "You can't use that here." << endl;
         return false;
     }
-    applyResourceDelta(energy, time,COST_ITEM_USE_ENERGY, COST_ITEM_USE_TIME);    // use cost, charged once
+    applyResourceDelta(energy, time,COST_ITEM_USE_ENERGY, COST_ITEM_USE_TIME);
         return true;
 }
 bool handleUnlockCabinetCommand(const char* code, int currentFloor, int currentRoom,
@@ -215,7 +215,7 @@ bool handleUnlockCabinetCommand(const char* code, int currentFloor, int currentR
         cout << "The cabinet is already open." << endl;
         return false;
     }
-    if (!verifyCabinetCode(code, objectives)) {          // your switches function
+    if (!verifyCabinetCode(code, objectives)) {
         cout << "Wrong code, or you haven't found all the clues." << endl;
         return false;
     }

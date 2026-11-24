@@ -25,6 +25,11 @@ int main() {
         cerr << "Error: Could not load " << mapFile << "\n";
         return 1;
     }
+    int reachable = countReachableRooms(1, 1, horizontalConn);
+    if (reachable < TOTAL_ROOMS) {
+        cerr << "Warning: the map is not fully connected (" << reachable
+             << " of " << TOTAL_ROOMS << " rooms reachable)." << endl;
+    }
     if (!loadInitialState(initStateFile, playerFloor, playerRoom, energy, time, score,
                           inventory, inventoryCount, objectives, emergencyTripsLeft)) {
         cerr << "Error: Could not load " << initStateFile << "\n";

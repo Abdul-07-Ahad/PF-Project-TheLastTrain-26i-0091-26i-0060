@@ -6,6 +6,7 @@
 #include <fstream>
 #include <cstring>
 #include <cstdlib>
+#include "physics.h"
 using namespace std;
 bool loadBuildingMap(const char* filename,
                     char horizontalConn[NUM_FLOORS][ROOMS_PER_FLOOR - 1],
@@ -141,4 +142,42 @@ bool validateStartingRoom(int startFloor, int startRoom , const char horizontalC
         return false;
     }
     return true;
+}
+
+int countReachableRooms(int startFloor, int startRoom,
+                        const char horizontalConn[NUM_FLOORS][ROOMS_PER_FLOOR - 1]) {
+    if (startFloor < 1 || startFloor > NUM_FLOORS || startRoom < 1 || startRoom > ROOMS_PER_FLOOR) {
+        return 0;
+    }
+
+    bool visited[NUM_FLOORS][ROOMS_PER_FLOOR] = {};
+    int queueFloor[TOTAL_ROOMS];
+    int queueRoom[TOTAL_ROOMS];
+    int head = 0;
+    int tail = 0;
+
+    visited[startFloor - 1][startRoom - 1] = true;
+    queueFloor[tail] = startFloor;
+    queueRoom[tail] = startRoom;
+    tail++;
+
+    while (head < tail) {
+        int f = queueFloor[head];
+        int r = queueRoom[head];
+        head++;
+
+        for (int nf = 1; nf <= NUM_FLOORS; nf++) {
+            for (int nr = 1; nr <= ROOMS_PER_FLOOR; nr++) {
+                char connType;
+                if (!visited[nf - 1][nr - 1] &&
+                    isDirectlyConnected(f, r, nf, nr, horizontalConn, connType)) {
+                    visited[nf - 1][nr - 1] = true;
+                    queueFloor[tail] = nf;
+                    queueRoom[tail] = nr;
+                    tail++;
+                }
+            }
+        }
+    }
+    return tail;
 }
